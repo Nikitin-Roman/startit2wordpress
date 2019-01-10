@@ -1,37 +1,67 @@
+<?php
+    $about_left_bg = get_sub_field('about_left_bg');
+    $about_right_bg = get_sub_field('about_right_bg');
+    $about_left_image = get_sub_field('about_left_image');
+?>
 <section id="about" class="about">
+    <style type="text/css">
+        .about:before { 
+             background-image: url("<?php echo $about_left_bg['url'];?>"); 
+        }
+        .about:after { 
+             background-image: url("<?php echo $about_right_bg['url'];?>"); 
+        }
+    </style>
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="section-title">
-                    <h2>About Company</h2>
-                    <p>Lorem ipsum dolor sit, consectet ipsum dolor sit</p>
+                    <h2><?php the_sub_field('about_title'); ?></h2>
+                    <p><?php the_sub_field('about_subtitle'); ?></p>
                 </div>
                 <div class="about_content_box box-left">
                     <div class="about_txt_box">
-                        <p>Ut enim ad minima veniam, quis nostrum exercitationem corpo commosequatur? Quis autem vel eum iure veniam, quis nostru sequatur? Quis autem vel eum Quis autem vel eum iure veniam lorem quis nostru iure...</p>
+                        <p><?php the_sub_field('about_left_text'); ?></p>
                     </div>
                     <div class="about_img_box">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/about/img1.jpg" alt="img">
+                        <?php echo ($about_left_image) ? '<img src="'.$about_left_image["sizes"]["about-left-image"].'" alt="'.$about_left_image["alt"].'">' : '' ?>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="about_content_box box-right">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="about_img_box">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/about/img2.jpg" alt="img">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="about_img_box">
-                                <img src="<?php echo get_template_directory_uri(); ?>/images/about/img3.jpg" alt="img">
-                            </div>
-                        </div>
+                        <?php 
+                                if( have_rows('about_right_images') ):
+                                    // loop through the rows of data
+                                    while ( have_rows('about_right_images') ) : the_row();
+                                    $about_right_image = get_sub_field('about_right_image');
+                            ?>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="about_img_box">
+                                        <?php echo ($about_right_image) ? '<img src="'.$about_right_image["sizes"]["about-right-image"].'" alt="'.$about_right_image["alt"].'">' : '' ?>
+                                    </div>
+                                </div>
+                                            <?php 
+                                    endwhile;
+                                else :
+                                    // no rows found
+                                endif;
+                        ?>                        
                     </div>
                     <div class="about_txt_box">
-                        <p>Ut enim ad minima veniam, quis nostrum exercitationem corporate loorem commosequatur? Quis autem vel eum iure veniam, quis nostruction doloru sequatur? Quis autem vel eum Quis autem vel eum iure veniam lorem ipsui lorem quis nostru iure.Ut enim ad minima veniam, quis nostrum exercitatio commosequatur? </p>
-                        <p>Ut enim ad minima veniam, quis nostrum exercitationem corporate loorem commosequatur? Quis autem vel eum iure veniam, quis nostruction dolor sequatur.</p>
+                        <?php 
+                                if( have_rows('about_right_text') ):
+                                    // loop through the rows of data
+                                    while ( have_rows('about_right_text') ) : the_row();
+                            ?>
+                                      <p> <?php  the_sub_field('about_right_paragraph'); ?></p>
+                                <?php 
+                                    endwhile;
+                                else :
+                                    // no rows found
+                                endif;
+                        ?>
                     </div>
                 </div>
             </div>

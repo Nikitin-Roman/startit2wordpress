@@ -1,11 +1,28 @@
 <?php
+// отключаем верхний админ бар
 function my_function_admin_bar(){
 return false;
 }
 add_filter( 'show_admin_bar' , 'my_function_admin_bar');
+
+// хуки для подключения стилей и скриптов
 	add_action( 'wp_enqueue_scripts', 'theme_styles' );
 	add_action('wp_enqueue_scripts', 'theme_scripts');
+//хук для регистрации меню
+	add_action('after_setup_theme', 'theme_after_setup');
 
+// регистрация верхнего меню
+	function theme_after_setup(){
+		register_nav_menu( 'top', 'Шапка' );
+		add_image_size( 'logo-size', 78, 64, true );
+		add_image_size( 'about-left-image', 480, 286, true );
+		add_image_size( 'about-right-image', 263, 267, true );
+		add_image_size( 'portfolio-image', 263, 263, true );
+		add_image_size( 'portfolio-slider-image', 650, 650, true );
+		add_image_size( 'articles-image', 360, 272, true );
+	}
+
+//подключение стилей и скриптов
 	function theme_styles(){
 		wp_enqueue_style( 'fonts', '//fonts.googleapis.com/css?family=Roboto:300,400,500,700/Lora:400' );
 		wp_enqueue_style( 'ionicons', get_template_directory_uri() . '/css/fonts/ionicons/css/ionicon.css' );

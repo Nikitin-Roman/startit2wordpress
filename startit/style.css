@@ -33,15 +33,15 @@
 
 @font-face {
     font-family: 'GT Walsheim Bold';
-    src: url('fonts/GT Walsheim Bold.otf');
+    src: url('css/fonts/GT Walsheim Bold.otf');
 }
 @font-face {
     font-family: 'GT Walsheim Medium';
-    src: url('fonts/GT Walsheim Medium.ttf');
+    src: url('css/fonts/GT Walsheim Medium.ttf');
 }
 @font-face {
     font-family: 'GT Walsheim Regular';
-    src: url('fonts/GT Walsheim Regular.ttf');
+    src: url('css/fonts/GT Walsheim Regular.ttf');
 }
 
 /*---------- Reset ---------*/
@@ -185,7 +185,6 @@ img{
     padding-bottom: 0px;
     background-position: center;
     background-size: cover;
-    background-image: url('images/slider/slider-bg1.jpg');
 }
 .section-shape img{
     position: absolute;
@@ -490,7 +489,6 @@ img{
     position: absolute;
     top: 0;
     left: 0;
-    background: url("images/left-layer.png");
     background-position: left;
     background-size: auto;
     background-repeat: no-repeat;
@@ -504,7 +502,6 @@ img{
     position: absolute;
     top: 0;
     right: 0;
-    background: url("images/right-layer.png");
     background-position: right;
     background-size: auto;
     background-repeat: no-repeat;
@@ -1891,8 +1888,8 @@ h4.widget_title:after{
 
 /*---- Contact Section----*/
 .contact {
-    position: relative;
     background: url("images/footer-bg.jpg");
+    position: relative;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

@@ -1,39 +1,33 @@
+
 <div class="main-wrapper">
 
     <section id="services" class="services pt-10">
         <div class="container">
             <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Lorem ipsum dolor sit, consectet ipsum dolor sit</p>
+                <h2><?php the_sub_field('services_title'); ?></h2>
+                <p><?php the_sub_field('services_subtitle'); ?></p>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="servicebox">
-                        <div class="srv_desc">
-                            <h5 class="count">01</h5>
-                            <h4><a href="index.html#">Web Designing</a></h4>
-                            <p>Ut enim ad minima veniam, quis nostr um exercitationem corporate loorem commosequatur? Quis autem vel</p>
+                <?php 
+                        if( have_rows('services_items') ):
+                            // loop through the rows of data
+                            while ( have_rows('services_items') ) : the_row();
+                ?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="servicebox">
+                            <div class="srv_desc">
+                                <h5 class="count"><?php the_sub_field('service_item_number'); ?></h5>
+                                <h4><a href="<?php the_sub_field('service_item_title_url'); ?>"><?php the_sub_field('service_item_title_text'); ?></a></h4>
+                                <p><?php the_sub_field('service_item_desctiption'); ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="servicebox">
-                        <div class="srv_desc">
-                            <h5 class="count">02</h5>
-                            <h4><a href="index.html#">Photography</a></h4>
-                            <p>Ut enim ad minima veniam, quis nostr um exercitationem corporate loorem commosequatur? Quis autem vel</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="servicebox">
-                        <div class="srv_desc">
-                            <h5 class="count">03</h5>
-                            <h4><a href="index.html#">Art Direction</a></h4>
-                            <p>Ut enim ad minima veniam, quis nostr um exercitationem corporate loorem commosequatur? Quis autem vel</p>
-                        </div>
-                    </div>
-                </div>
+                <?php 
+                            endwhile;
+                        else :
+                            // no rows found
+                        endif;
+                ?>
             </div>
         </div>
     </section>

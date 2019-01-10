@@ -1,3 +1,7 @@
+<?php 
+    $favicon = get_sub_field('favicon');
+    $img_logo = get_sub_field('header_logo');
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
     <head>
@@ -9,10 +13,10 @@
         <meta name="author" content="">
 
         <!-- Page Title -->
-        <title>Carrby - Agency Template</title>
+        <title><?php the_sub_field('header_title'); ?></title>
 
         <!-- Favicon and Touch Icons -->
-        <link href="<?php echo get_template_directory_uri(); ?>/images/favicon.png" rel="shortcut icon" type="image/png">
+        <link href="<?php echo $favicon[url]; ?>" rel="shortcut icon" type="image/png">
 
         <!-- Lead Style -->
         <?php wp_head(); ?>
@@ -20,23 +24,34 @@
 
     <body>
         <!-- Start Header -->
+
         <header id="header" class="header">
             <div class="navigation">
                 <div class="container">
                     <nav id="flexmenu">
                         <div class="logo">
-                            <a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="logo"></a>
+                            <a href="<?php the_sub_field('header_logo_url'); ?>"><?php echo ($img_logo) ? '<img src="'.$img_logo["sizes"]["logo-size"].'" alt="'.$img_logo["alt"].'">' : '' ?></a>
                         </div>
                         <div class="nav-inner">
                             <div id="mobile-toggle" class="mobile-btn"></div>
-                            <ul class="main-menu">
-                                <li class="menu-item"><a class="active" href="<?php echo home_url(); ?>#slider">Home</a></li>
-                                <li class="menu-item"><a href="<?php echo home_url(); ?>#services">Services</a></li>
-                                <li class="menu-item"><a href="<?php echo home_url(); ?>#about">About Us</a></li>
-                                <li class="menu-item"><a href="<?php echo home_url(); ?>#works">Portfolio</a></li>
-                                <li class="menu-item"><a href="<?php echo home_url(); ?>#blog">Blog</a></li>
-                                <li class="menu-item"><a href="<?php echo home_url(); ?>#contact">Contact</a></li>
-                            </ul>
+                            <?php wp_nav_menu( array(
+                                'theme_location'  => 'top',
+                                'menu'            => '',
+                                'container'       => '',
+                                'container_class' => '',
+                                'container_id'    => '',
+                                'menu_class'      => 'main-menu',
+                                'menu_id'         => '',
+                                'echo'            => true,
+                                'fallback_cb'     => 'wp_page_menu',
+                                'before'          => '',
+                                'after'           => '',
+                                'link_before'     => '',
+                                'link_after'      => '',
+                                'items_wrap'      => '<ul id = "%1$s" class = "%2$s">%3$s</ul>',
+                                'depth'           => 0,
+                                'walker'          => '',
+                            ) );?>
                         </div>
                     </nav>
                 </div>

@@ -2,7 +2,7 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="copyright">
-                        <p> &copy; 2018 - carrby.agency. Created by <a href="index.html#">WP ThemeBooster</a> All rights reserved.</p>
+                        <p> <?php the_sub_field('footer_text'); ?><a href="<?php the_sub_field('footer_link_url'); ?>"><?php the_sub_field('footer_link_text'); ?></a><?php the_sub_field('footer_text_end'); ?></p>
                     </div>
                 </div>
             </div>

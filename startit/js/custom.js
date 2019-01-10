@@ -12,6 +12,8 @@ Description:
 	
 	jQuery(document).ready(function () {
 
+
+        $('.header .main-menu li:first-child a').addClass('active');
         //Sticky menu add class
         $(window).scroll(function() {    
             var scroll = $(window).scrollTop();
