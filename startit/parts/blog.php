@@ -6,30 +6,29 @@
         </div>
         <div class="row">
             <?php 
-                    if( have_rows('blog_post') ):
-                        // loop through the rows of data
-                        while ( have_rows('blog_post') ) : the_row();
-                        $post_image     = get_sub_field('post_image');
+                $args = array('post_type' => 'post', 'posts_per_page' => 3);
+                $loop = new WP_Query($args);
+
+                if( $loop ->have_posts() ):
+                    while( $loop->have_posts() ): $loop->the_post();
                 ?>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog_post">
-                            <div class="post_img">
-                                <a href="<?php the_sub_field('post_url'); ?>"><?php echo ($post_image) ? '<img src="'.$post_image["sizes"]["articles-image"].'" alt="'.$post_image["alt"].'">' : '' ?></a>
-                            </div>
-                            <div class="post_content">
-                                <div class="post_header">
-                                    <h2 class="post_title"><a href="<?php the_sub_field('post_url'); ?>"><?php the_sub_field('post_name'); ?></a></h2>
-                                    <div class="read_more"><a href="<?php the_sub_field('post_url'); ?>"><?php the_sub_field('post_link_name'); ?></a></div>
-                                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog_post">
+                        <div class="post_img">
+                            <a href="<?php the_permalink() ?>"><?php the_post_thumbnail('articles-image') ?></a>
+                        </div>
+                        <div class="post_content">
+                            <div class="post_header">
+                                <h2 class="post_title"><a href="<?php the_permalink() ?>"><?php the_title();  ?></a></h2>
+                                <div class="read_more"><a href="<?php the_permalink() ?>"><?php the_excerpt(); ?></a></div>
                             </div>
                         </div>
-                    </div>                          
-                <?php 
-                        endwhile;
-                    else :
-                        // no rows found
+                    </div>
+                </div>                       
+                        <?php endwhile;
                     endif;
-            ?>
+                    wp_reset_query();
+                    ?>
 
         </div>
     </div>

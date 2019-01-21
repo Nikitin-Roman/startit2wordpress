@@ -8,25 +8,31 @@
                 <p><?php the_sub_field('services_subtitle'); ?></p>
             </div>
             <div class="row">
-                <?php 
-                        if( have_rows('services_items') ):
-                            // loop through the rows of data
-                            while ( have_rows('services_items') ) : the_row();
-                ?>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="servicebox">
-                            <div class="srv_desc">
-                                <h5 class="count"><?php the_sub_field('service_item_number'); ?></h5>
-                                <h4><a href="<?php the_sub_field('service_item_title_url'); ?>"><?php the_sub_field('service_item_title_text'); ?></a></h4>
-                                <p><?php the_sub_field('service_item_desctiption'); ?></p>
+
+
+                <?php
+
+                $args = array('post_type' => 'services', 'posts_per_page' => 3);
+                $loop = new WP_Query($args);
+                $i=1;
+                if( $loop ->have_posts() ):
+                    while( $loop->have_posts() ): $loop->the_post(); ?>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="servicebox">
+                                <div class="srv_desc">
+                                    <h5 class="count"><?php if ($i<10) {$format = '0%d';}
+                                    else $format = '%d';
+                                        echo sprintf($format, $i); $i++ ?></h5>
+                                    <h4><a href="<?php the_permalink() ?>"><?php the_title();  ?></a></h4>
+                                    <p><?php the_content(); ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php 
-                            endwhile;
-                        else :
-                            // no rows found
-                        endif;
+
+                    <?php endwhile;
+                endif;
+                wp_reset_query();
                 ?>
             </div>
         </div>

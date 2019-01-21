@@ -1,6 +1,6 @@
 <?php 
     $favicon = get_sub_field('favicon');
-    $img_logo = get_sub_field('header_logo');
+    $img_logo = get_field('site_logo', 'option');
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -30,7 +30,7 @@
                 <div class="container">
                     <nav id="flexmenu">
                         <div class="logo">
-                            <a href="<?php the_sub_field('header_logo_url'); ?>"><?php echo ($img_logo) ? '<img src="'.$img_logo["sizes"]["logo-size"].'" alt="'.$img_logo["alt"].'">' : '' ?></a>
+                            <a href="<?php the_field('site_logo_link', 'option'); ?>"><?php echo ($img_logo) ? '<img src="'.$img_logo["sizes"]["logo-size"].'" alt="'.$img_logo["alt"].'">' : '' ?></a>
                         </div>
                         <div class="nav-inner">
                             <div id="mobile-toggle" class="mobile-btn"></div>

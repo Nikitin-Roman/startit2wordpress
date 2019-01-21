@@ -2,7 +2,7 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="copyright">
-                        <p> <?php the_sub_field('footer_text'); ?><a href="<?php the_sub_field('footer_link_url'); ?>"><?php the_sub_field('footer_link_text'); ?></a><?php the_sub_field('footer_text_end'); ?></p>
+                        <p> <?php the_field('site_footer_begin', 'option'); ?><a href="<?php the_field('site_footer_link', 'option'); ?>"><?php the_field('site_footer_link_text', 'option'); ?></a><?php the_field('site_footer_text_end', 'option'); ?></p>
                     </div>
                 </div>
             </div>
