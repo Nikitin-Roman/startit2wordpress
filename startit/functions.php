@@ -182,3 +182,12 @@ add_filter( 'show_admin_bar' , 'my_function_admin_bar');
 			));
 			
 		}
+// анонс поста
+
+		add_filter( 'excerpt_length', function(){
+			return 15;
+		} );
+
+		add_filter('excerpt_more', function($more) {
+			return '';
+		});

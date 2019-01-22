@@ -25,7 +25,7 @@
                                     else $format = '%d';
                                         echo sprintf($format, $i); $i++ ?></h5>
                                     <h4><a href="<?php the_permalink() ?>"><?php the_title();  ?></a></h4>
-                                    <p><?php the_content(); ?></p>
+                                    <p><?php the_excerpt(); ?></p>
                                 </div>
                             </div>
                         </div>
