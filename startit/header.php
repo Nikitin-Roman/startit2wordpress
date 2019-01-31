@@ -24,7 +24,6 @@
 
     <body>
         <!-- Start Header -->
-
         <header id="header" class="header">
             <div class="navigation">
                 <div class="container">

@@ -10,7 +10,12 @@
             while ( have_rows('page_builder') ) : the_row();
 
   		         if( get_row_layout() == 'header_section' ):
-  								 	get_header();
+									if ( is_front_page() ){
+										get_header();
+									}
+									else {
+										get_header('posts');
+									}
   		         endif;
 
                 if( get_row_layout() == 'slider_section' ):

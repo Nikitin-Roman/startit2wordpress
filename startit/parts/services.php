@@ -16,7 +16,9 @@
                 $loop = new WP_Query($args);
                 $i=1;
                 if( $loop ->have_posts() ):
-                    while( $loop->have_posts() ): $loop->the_post(); ?>
+                    while( $loop->have_posts() ): $loop->the_post(); 
+                        $excerpt_descr = get_the_excerpt();
+                        ?>
 
                         <div class="col-lg-4 col-md-6">
                             <div class="servicebox">
@@ -25,7 +27,7 @@
                                     else $format = '%d';
                                         echo sprintf($format, $i); $i++ ?></h5>
                                     <h4><a href="<?php the_permalink() ?>"><?php the_title();  ?></a></h4>
-                                    <p><?php the_excerpt(); ?></p>
+                                    <p>                                                        <?php echo wp_trim_words($excerpt_descr,15,'');?></p>
                                 </div>
                             </div>
                         </div>
