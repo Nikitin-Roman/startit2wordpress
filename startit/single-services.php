@@ -28,12 +28,7 @@ else {
                          </div>
                      </div>
 
-                    <?php 
-                                 endwhile;
-                             else :
-                                 // no rows found
-                             endif;
-                     ?> 
+
 
                      <div class="service_post-inner">
                          <h2 class="project_title">Offers in the service</h2>
@@ -127,66 +122,50 @@ else {
                      </div>
                      <div class="owl-carousel owl-theme testimonial_carousel2">
 
+                        <?php 
 
-                        <?php
-
-                                                // WP_Query arguments
-                                                $args = array(
-                                                    'post_type'              => array( 'testimonial' ),
-                                                    'posts_per_page'         => '-1',
-                                                    'orderby'                => 'title',
-                                                );
-
-                                                // The Query
-                                                $query = new WP_Query( $args );
-
-                                                // The Loop
-                                                if ( $query->have_posts() ) {
-                                                    while ( $query->have_posts() ) {
-                                                        $query->the_post();
-                                                        // do something
-                                                        ?>
-
-                                    <div class="item">
-                                        <div class="testibox">
-                                            <div class="testi-img">
-                                               <?php the_post_thumbnail('testimonial-img') ?>
-                                            </div>
-                                            <div class="testi-content">
-                                                <ul>
-                                                    <?php 
-                                                            if( have_rows('stars') ):
-                                                                // loop through the rows of data
-                                                                while ( have_rows('stars') ) : the_row();
-                                                        ?>
-                                                        <li><?php the_sub_field('star');?></li>
-                                                                        <?php 
-                                                                endwhile;
-                                                            else :
-                                                                // no rows found
-                                                            endif;
-                                                    ?> 
-                                                </ul>
-                                                <p><?php the_content();  ?></p>
-                                                <h4><?php the_title();  ?></h4>
-                                                <h6><?php the_field('position');  ?></h6>
-                                            </div>
+                        $posts = get_field('testimonial_link');
+                        if( $posts ): ?>
+                            <?php foreach( $posts as $post):  ?>
+                                <?php setup_postdata($post); ?>
+                                <div class="item">
+                                    <div class="testibox">
+                                        <div class="testi-img">
+                                           <?php the_post_thumbnail('testimonial-img') ?>
+                                        </div>
+                                        <div class="testi-content">
+                                            <ul>
+                                                <?php 
+                                                        if( have_rows('stars') ):
+                                                            // loop through the rows of data
+                                                            while ( have_rows('stars') ) : the_row();
+                                                    ?>
+                                                    <li><?php the_sub_field('star');?></li>
+                                                                    <?php 
+                                                            endwhile;
+                                                        else :
+                                                            // no rows found
+                                                        endif;
+                                                ?> 
+                                            </ul>
+                                            <p><?php the_content();  ?></p>
+                                            <h4><?php the_title();  ?></h4>
+                                            <h6><?php the_field('position');  ?></h6>
                                         </div>
                                     </div>
-
-                                                        <?php
-                                                    }
-                                                } else {
-                                                    // no posts found
-                                                }
-
-                                                // Restore original Post Data
-                                                wp_reset_postdata();
-                        ?>
-
+                                </div>
+                            <?php endforeach; ?>
+                            <?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
+                        <?php endif; ?>
 
                      </div>
                  </div>
              </section>
+             <?php 
+                          endwhile;
+                      else :
+                          // no rows found
+                      endif;
+              ?> 
 <?php get_template_part('parts/contact'); ?>
 <?php get_footer(); ?>

@@ -104,30 +104,17 @@ foreach ( $terms as $term ) {
                      </div>
                  </div>
              </section>
-             <?php endwhile; ?>
-           <?php endif; ?>
+
              <section id="testimonials" class="testimonials testimonials1">
                  <div class="container">
                      <div class="owl-carousel owl-theme testimonial_carousel">
 
-<?php
+                        <?php 
 
-                     	// WP_Query arguments
-                     	$args = array(
-                     		'post_type'              => array( 'testimonial' ),
-                     		'posts_per_page'         => '-1',
-                     		'orderby'                => 'title',
-                     	);
-
-                     	// The Query
-                     	$query = new WP_Query( $args );
-
-                     	// The Loop
-                     	if ( $query->have_posts() ) {
-                     		while ( $query->have_posts() ) {
-                     			$query->the_post();
-                     			// do something
-                     			?>
+                        $posts = get_field('testimonial_portfolio');
+                        if( $posts ): ?>
+                            <?php foreach( $posts as $post):  ?>
+                                <?php setup_postdata($post); ?>
 
                      			<div class="item">
                      			    <div class="testibox">
@@ -156,20 +143,16 @@ foreach ( $terms as $term ) {
                      			    </div>
                      			</div>
 
-                     			<?php
-                     		}
-                     	} else {
-                     		// no posts found
-                     	}
-
-                     	// Restore original Post Data
-                     	wp_reset_postdata();
-?>
+                                    <?php endforeach; ?>
+                                    <?php wp_reset_postdata();  ?>
+                                <?php endif; ?>
 
 
                      </div>
                  </div>
              </section>
-
+               <?php endwhile; ?>
+             <?php endif; ?>
+</div>
              <?php get_template_part('parts/contact'); ?>
              <?php get_footer(); ?>
